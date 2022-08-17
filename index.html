@@ -263,26 +263,44 @@
                     <h2 class="heading">Grid Word Finder</h2>
                 </div>
                 <div class="col-md-8">
+
+                    <img src="images/IMG_BAC8F8DECB7A-1.jpeg"/>
+
                     <p>
-                        Our Stock Investing Practice proved to be the most difficult project for our team.
-                        It built on many of the concepts that we learned in the previous projects but 
-                        required us to focus a bit more on UI elements that the user interacted with 
-                        and having each of those components update with one another. For example, we used 
-                        a slider, attempted a pie chart (resulted in a bar graph), and a text box, that 
-                        would all update simultaneously to accurately depict how much the user was buying or
-                        selling. 
+                        Grid Word Finder was the most success we had as a team. It felt like this project 
+                        was the one where all of the other knowledge from our previous projects came together. 
+                        Similar to previous projects we had to call an API each time the user submits a word to 
+                        check if it is a real word. 
+
+                        We used SignalR in this project to allow for two users to play the game at the same time 
+                        and update each player in real time when a users score increased by finding a word. 
                     </p>
 
-                    <img src="images/Stockticker.png"/>
+                    <pre class="line-numbers">
+                        <code class="language-c#">
+                            private void AddScoreAndWord(string connectionID, string word, int score)
+                            {
+                                if (Context.ConnectionId == connectionIDS[0])
+                                {
+                                    user1Words.Add(word);
+                                    user1Score += score;
+                                }
+                                else if(Context.ConnectionId == connectionIDS[1])
+                                {
+                                    user2Words.Add(word);
+                                    user2Score += score;
+                                }
+                            }
+                        </code>
+                    </pre>
 
                     <p>
-                        We used Polygon.io as our API that we called as the user progressed through the 
-                        game. I was primarily responsible for handling the UI portions of this project.
-                        Unfortunately, the pie chart library that we used ran into issues when trying to 
-                        update other portions of the UI which lead us to use the bar graph pictured above.
+                        Something new with this project was that it needed to work on a mobile device which is the image shown above. 
+                        Other than that, the biggest struggle we ran into as a team was a bug that reset scores after the game was 
+                        complete and kept them at a zero score with no words in the words lists.
 
-                        When the user quit the game it would display their overall earnings throughout the 
-                        progress of the game to notify them whether they made or lost money in their journey.
+                        Otherwise, we had a team member that handled the javascript logic to determine whether the letter selected 
+                        was valid or not based on the previous selection.
                     </p>
                 </div>
             </div>
