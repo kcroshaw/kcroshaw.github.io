@@ -1,1 +1,315 @@
-"Hello World" 
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Portfolio</title>
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="mobile-menu-open" class="shadow-large">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+    </div>
+    <!-- End #mobile-menu-toggle -->
+    <header>
+        <div id="mobile-menu-close">
+            <span>Close</span> <i class="fa fa-times" aria-hidden="true"></i>
+        </div>
+        <ul id="menu" class="shadow">
+            <li>
+                <a href="#hangman">Hangman</a>
+            </li>
+            <li>
+                <a href="#bankingapp">Banking App</a>
+            </li>
+            <li>
+                <a href="#stockinvesting">Stock Investing Practice</a>
+            </li>
+            <li>
+                <a href="#gridwordfinder">Grid Word Finder</a>
+            </li>
+        </ul>
+    </header>
+    <!-- End header -->
+
+    <div id="lead">
+        <div id="lead-content">
+            <h1>Kolby Croshaw</h1>
+            <h2>CS3750 Portfolio</h2>
+        </div>
+        <!-- End #lead-content -->
+
+        <div id="lead-overlay"></div>
+
+        <div id="lead-down">
+            <span>
+                <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </span>
+        </div>
+        <!-- End #lead-down -->
+    </div>
+    <!-- End #lead -->
+
+    <div id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h2 class="heading">About Me</h2>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                        I am just heading into my last semester in my Computer Science degree
+                        at Weber State University. I spent some time working as a software 
+                        developer for Cubiscan and recently made a career change. I work for 
+                        Pluralsight as a Technical Skills Consultant and develop projects on
+                        the side as a hobby. This is a portfolio of the work that my team and I
+                        completed this semester in our CS3750 Course.    
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End #about -->
+
+    <div id="hangman">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h2 class="heading">Hangman Game</h2>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                        The Hangman Game was written primarily in PHP and required functionality
+                        such as register, login, logout, playing the game, and viewing high scores. This 
+                        functionality was achieved by using SQL and storing the user's data such that
+                        none of their private information could be viewed or stolen. We hashed
+                        the passwords using SHA-256 and a salt.
+                    </p>
+                    <pre class="line-numbers">
+                        <code class="language-php">
+                            $saltedPassword = $password . $salt;
+                
+                            $hashedPassword = hash('sha256',$saltedPassword);
+                
+                            $sql = "INSERT INTO users (username, hashed_password, salt) VALUES ('$username', '$hashedPassword', '$salt')";
+                        </code>
+                    </pre>
+                    <p>
+                        Session variables were key in succeeding in this project. Specifically in 
+                        the logout portion. Having to unset, and destroy the variables so that the site
+                        does not remember the user when they open the page back up was critical.
+
+                        Additionaly, learning to work with a SQL database in PHP was a learning 
+                        experience for myself. I didn't have much PHP experience (at least that was
+                        recent) going into this project. Brushing up on skills that are simple to me 
+                        in other languages proved to be a challenge here.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End #hangman -->
+
+    <div id="bankingapp">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h2 class="heading">Banking App</h2>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                        The banking application was one that was more what I am accustomed to. Similar 
+                        to hangman, this application needed to allow the user to register, login, logout, 
+                        and access different portions of the application - similar to what you would do 
+                        in your modern banking applications nowadays. 
+
+                        We accomplished this by using ASP.net and hosting a MSSQL database online. Thankfully
+                        ASP.net handles much of the password hashing when creating scaffolded pages. One of 
+                        the challenges that we had to overcome as a team was understanding the use of models and 
+                        how they are used to access data from the databse and push data to it. 
+                    </p>
+
+                    <pre class="line-numbers">
+                        <code class="language-c#">
+                            public class Transaction
+                            {
+                                [Key]
+                                public int TransactionID { get; set; }
+
+                                [Required]
+                                [Display(Name = "Transaction Type")]
+                                public string TransactionType { get; set; }
+
+                                [Required]
+                                public string UserID { get; set; }
+
+                                public string Account { get; set; }
+
+                                public DateTime TransactionDate { get; set; }
+
+                                [RegularExpression(@"^\d+(\.\d{1,2})?$", ErrorMessage = "Can't have more than 2 decimal places")]
+                                [Precision(18,2)]
+                                public decimal TransactionAmount { get; set; }
+                            }
+                        </code>
+                    </pre>
+                    <p>
+                        Along with models, having to work with database migrations and handling database 
+                        functions through this method compared to a GUI or other typical procedures was a 
+                        learning curve for our team.
+
+                        I have experience working with these concepts and ideas which put a lot of that 
+                        workload on me to accomplish or assist team members in questions that they had 
+                        learning processes that were unfamiliar to them. Much of the backend for these
+                        functions were set up by myself such as the generic repository pattern and the 
+                        unit of work.
+                    </p>
+                    <pre class="line-numbers">
+                        <code class="language-c#">
+                            private IGenericRepository<ApplicationUser> _ApplicationUser;
+                                private IGenericRepository<Transaction> _Transaction;
+                        
+                                public IGenericRepository<ApplicationUser> ApplicationUser
+                                {
+                                    get
+                                    {
+                                        if (_ApplicationUser == null)
+                                        {
+                                            _ApplicationUser = new GenericRepository<ApplicationUser>(_dbContext);
+                                        }
+                                        return _ApplicationUser;
+                                    }
+                                }
+                                public IGenericRepository<Transaction> Transaction
+                                {
+                                    get
+                                    {
+                                        if (_Transaction == null)
+                                        {
+                                            _Transaction = new GenericRepository<Transaction>(_dbContext);
+                                        }
+                                        return _Transaction;
+                                    }
+                                }
+                        
+                                public int Commit()
+                                {
+                                    return _dbContext.SaveChanges();
+                                }
+                        
+                                public async Task<int> CommitAsync()
+                                {
+                                    return await _dbContext.SaveChangesAsync();
+                                }
+                        
+                                public void Dispose()
+                                {
+                                    _dbContext.Dispose();
+                                }
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End #bankingapp -->
+
+    <div id="stockinvesting">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h2 class="heading">Stock Investing</h2>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                        Our Stock Investing Practice proved to be the most difficult project for our team.
+                        It built on many of the concepts that we learned in the previous projects but 
+                        required us to focus a bit more on UI elements that the user interacted with 
+                        and having each of those components update with one another. For example, we used 
+                        a slider, attempted a pie chart (resulted in a bar graph), and a text box, that 
+                        would all update simultaneously to accurately depict how much the user was buying or
+                        selling. 
+                    </p>
+
+                    <img src="images/Stockticker.png"/>
+
+                    <p>
+                        We used Polygon.io as our API that we called as the user progressed through the 
+                        game. I was primarily responsible for handling the UI portions of this project.
+                        Unfortunately, the pie chart library that we used ran into issues when trying to 
+                        update other portions of the UI which lead us to use the bar graph pictured above.
+
+                        When the user quit the game it would display their overall earnings throughout the 
+                        progress of the game to notify them whether they made or lost money in their journey.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End #stockgame -->
+
+    <div id="gridwordfinder">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h2 class="heading">Grid Word Finder</h2>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                        Our Stock Investing Practice proved to be the most difficult project for our team.
+                        It built on many of the concepts that we learned in the previous projects but 
+                        required us to focus a bit more on UI elements that the user interacted with 
+                        and having each of those components update with one another. For example, we used 
+                        a slider, attempted a pie chart (resulted in a bar graph), and a text box, that 
+                        would all update simultaneously to accurately depict how much the user was buying or
+                        selling. 
+                    </p>
+
+                    <img src="images/Stockticker.png"/>
+
+                    <p>
+                        We used Polygon.io as our API that we called as the user progressed through the 
+                        game. I was primarily responsible for handling the UI portions of this project.
+                        Unfortunately, the pie chart library that we used ran into issues when trying to 
+                        update other portions of the UI which lead us to use the bar graph pictured above.
+
+                        When the user quit the game it would display their overall earnings throughout the 
+                        progress of the game to notify them whether they made or lost money in their journey.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End #gridwordfinder -->
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-5 copyright">
+                    <p>
+                        Copyright &copy; <span id="current-year">2022</span> Kolby Croshaw
+                    </p>
+                </div>
+                <div class="col-sm-2 top">
+                    <span id="to-top">
+                        <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                    </span>
+                </div>               
+            </div>
+        </div>
+    </footer>
+    <!-- End footer -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/scripts.min.js"></script>
+</body>
+
+</html>
